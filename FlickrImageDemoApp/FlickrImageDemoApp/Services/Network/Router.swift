@@ -10,25 +10,25 @@ import Alamofire
 enum Router: HTTPRouter {
     
     //GET
-    case apartments
+    case photoSearch
 
     var method: HttpMethod {
         switch self {
-        case .apartments:
+        case .photoSearch:
             return .get
         }
     }
     
     var headers: HTTPHeaders? {
         switch self {
-        case .apartments:
+        case .photoSearch:
             return nil
         }
     }
 
     var encodingType: Encoding {
         switch self {
-        case .apartments:
+        case .photoSearch:
             return .json
         }
     }
