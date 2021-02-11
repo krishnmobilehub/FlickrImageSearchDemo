@@ -46,8 +46,7 @@ public struct NetworkManager {
         arrEndPoints.append(searchQuery)
         var newStr = arrEndPoints.joined(separator: "=")
         newStr.append("/&page=\(page)")
-        if let newUrl = URL.init(string: newStr) {
-            print("NewUrl: ", newUrl)
+        if let newUrl = URL.init(string: newStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") {
             return newUrl
         }
         return url

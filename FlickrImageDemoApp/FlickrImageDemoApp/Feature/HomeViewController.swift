@@ -10,14 +10,17 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    //MARK: - IBOutlets
     @IBOutlet weak var noDataLabel: UILabel!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var tableHistoryView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    //MARK: - Variables
     lazy var presenter = HomePresenter()
     
+    //MARK: - View controller lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -27,6 +30,16 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         reloadImages(isNewPage: false)
+    }
+    
+    func setupUI() {
+        searchBar.text = searchQuery
+        tableHistoryView.isHidden = true
+        noDataLabel.isHidden = true
+        tableHistoryView.tableFooterView = UIView()
+        collectionView.registerCell(HomeCollViewCell.self)
+        collectionView.reloadData()
+        self.title = NavigationTitle.HomeViewTitle
     }
     
     func reloadImages(isNewPage: Bool) {
@@ -49,19 +62,10 @@ class HomeViewController: UIViewController {
             LoadingView.hide()
         }
     }
-
-    func setupUI() {
-        searchBar.text = searchQuery
-        tableHistoryView.isHidden = true
-        noDataLabel.isHidden = true
-        tableHistoryView.tableFooterView = UIView()
-        collectionView.registerCell(HomeCollViewCell.self)
-        collectionView.reloadData()
-        self.title = NavigationTitle.HomeViewTitle
-    }
     
 }
 
+//MARK: - UICollection View Delegate/Datasource
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -88,6 +92,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
+//MARK: - UITableView View Delegate/Datasource
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -118,6 +123,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+//MARK: - UIScrollView View Delegate
 extension HomeViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == collectionView {
@@ -126,6 +132,7 @@ extension HomeViewController: UIScrollViewDelegate {
     }
 }
 
+//MARK: - UISearchBar Delegate
 extension HomeViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -153,7 +160,7 @@ extension HomeViewController: UISearchBarDelegate {
     
 }
 
-
+//MARK: - Other protocols
 extension HomeViewController: Alertable {
     func showAlert(message: String) {
         self.showAlert(title: appName, message: message)

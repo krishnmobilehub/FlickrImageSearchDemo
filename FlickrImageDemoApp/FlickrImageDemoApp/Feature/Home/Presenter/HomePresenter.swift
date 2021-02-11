@@ -8,10 +8,12 @@ import Foundation
 
 class HomePresenter {
     
+    //MARK: - Variables
     public var photo: Photo?
     private var currentPage = 1
     static let rowHeight = 36
     
+    //MARK: - Webservice call
     func loadImages(completion: @escaping (String?) -> ()) {
         let request = Router.photoSearch
         NetworkManager.makeRequest(request, showLog: false, page: pageToLoad) { (result) in
@@ -35,6 +37,7 @@ class HomePresenter {
         }
     }
     
+    //MARK: - Update history
     func updateSearchHistory() {
         if searchQuery == "" {
             return
@@ -59,6 +62,7 @@ class HomePresenter {
         return []
     }
     
+    //MARK: - Pagination
     var pageToLoad: Int {
         guard let pages = photo?.pages else {
             return currentPage
