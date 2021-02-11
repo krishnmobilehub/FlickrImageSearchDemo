@@ -7,7 +7,7 @@ target 'FlickrImageDemoApp' do
 
   # Pods for FlickrImageDemoApp
 
-pod 'SDWebImage', '~> 5.0'
+
 
   target 'FlickrImageDemoAppTests' do
     inherit! :search_paths

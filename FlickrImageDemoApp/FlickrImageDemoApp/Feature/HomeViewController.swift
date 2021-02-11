@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
     
     func reloadImages() {
         LoadingView.show()
-        presenter.loadImages { (errorDescription) in
+        presenter.loadImages(page: 1) { (errorDescription) in
             if errorDescription == nil {
                 if self.presenter.photo?.photos?.count == 0 {
                     self.lblNodataFound.isHidden = false
@@ -71,7 +71,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.size.width / 2.3, height: self.view.frame.size.height/2.8)
+        return CGSize(width: self.view.frame.size.width / 2.3, height: self.view.frame.size.height/3.5)
     }
     
 }

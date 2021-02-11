@@ -10,7 +10,7 @@ class HomePresenter {
     
     var photo: Photo?
     
-    func loadImages(completion: @escaping (String?) -> ()) {
+    func loadImages(page: Int, completion: @escaping (String?) -> ()) {
         let request = Router.photoSearch
         NetworkManager.makeRequest(request, showLog: true) { (result) in
             switch result {
