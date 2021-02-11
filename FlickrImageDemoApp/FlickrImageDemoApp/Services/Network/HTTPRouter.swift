@@ -21,17 +21,6 @@ enum HttpMethod : String {
     case delete  = "DELETE"
 }
 
-//Server types
-enum EndPoints {
-    case appartment
-    var path:String {
-        switch self {
-        case .appartment:
-            return "apartments.json"
-        }
-    }
-}
-
 protocol HTTPRouter {
     var baseURL: String { get }
     var method: HttpMethod { get }
@@ -45,7 +34,7 @@ protocol HTTPRouter {
 extension HTTPRouter {
     
     var baseURL: String {
-        return Constants.baseURL
+        return API.baseURL
     }
     
     var url: URL {
@@ -53,7 +42,7 @@ extension HTTPRouter {
     }
     
     var endPoint: String {
-        return EndPoints.appartment.path
+        return EndPoints.SearchApi
     }
     
     var parameters: [String: Any]? {

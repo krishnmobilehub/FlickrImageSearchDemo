@@ -35,6 +35,17 @@ public struct NetworkManager {
                 completion(.failure(generateError(from: error.underlyingError ?? error, with: responseObject)))
             }
         }
+        
+        // Decode data into specified datamodel
+        func decodeResponse<T:Decodable>(dataToDeocde:Data,decodingType:T.Type) -> T? {
+            do {
+                let genericModel = try JSONDecoder().decode(decodingType, from: dataToDeocde)
+                return genericModel
+            } catch {
+                return nil
+            }
+        }
+    
     }
 
     

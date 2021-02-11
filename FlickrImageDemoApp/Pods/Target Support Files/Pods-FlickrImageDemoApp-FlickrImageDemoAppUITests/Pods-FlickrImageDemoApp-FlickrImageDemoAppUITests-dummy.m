@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_FlickrImageDemoApp_FlickrImageDemoAppUITests : NSObject
+@end
+@implementation PodsDummy_Pods_FlickrImageDemoApp_FlickrImageDemoAppUITests
+@end
