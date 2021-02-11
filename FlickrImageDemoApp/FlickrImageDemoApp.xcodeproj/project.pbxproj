@@ -12,7 +12,6 @@
 		13353ADD25D2DD1D001A6B64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13353ADB25D2DD1D001A6B64 /* Main.storyboard */; };
 		13353ADF25D2DD1F001A6B64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13353ADE25D2DD1F001A6B64 /* Assets.xcassets */; };
 		13353AE225D2DD1F001A6B64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 13353AE025D2DD1F001A6B64 /* LaunchScreen.storyboard */; };
-		13353AED25D2DD1F001A6B64 /* FlickrImageDemoAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13353AEC25D2DD1F001A6B64 /* FlickrImageDemoAppTests.swift */; };
 		13353AF825D2DD1F001A6B64 /* FlickrImageDemoAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13353AF725D2DD1F001A6B64 /* FlickrImageDemoAppUITests.swift */; };
 		88A0952325D2E11B0027D58F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A0951925D2E11B0027D58F /* Constants.swift */; };
 		88A0952425D2E11B0027D58F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A0951A25D2E11B0027D58F /* LoadingView.swift */; };
@@ -31,6 +30,9 @@
 		88A0954425D2E5540027D58F /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A0953C25D2E5540027D58F /* NetworkError.swift */; };
 		88A0954D25D2FEF80027D58F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A0954C25D2FEF80027D58F /* HomeViewController.swift */; };
 		88A7525125D5014500A814A3 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 88A7525025D5014500A814A3 /* SDWebImage */; };
+		88A7528725D517FC00A814A3 /* NetworkConnectionTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7528625D517FC00A814A3 /* NetworkConnectionTest.swift */; };
+		88A752A125D5191A00A814A3 /* NetworkManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A752A025D5191A00A814A3 /* NetworkManagerTest.swift */; };
+		88A752A925D51F3400A814A3 /* HomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A752A825D51F3400A814A3 /* HomeViewTests.swift */; };
 		88F1F9F325D3B00A00628C48 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 88F1F9F225D3B00A00628C48 /* Alamofire */; };
 		88F1FA0225D3B4C400628C48 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F1FA0125D3B4C400628C48 /* HomePresenter.swift */; };
 		88F1FA0A25D3B9CB00628C48 /* EndPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F1FA0925D3B9CB00628C48 /* EndPoints.swift */; };
@@ -67,7 +69,6 @@
 		13353AE125D2DD1F001A6B64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		13353AE325D2DD1F001A6B64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13353AE825D2DD1F001A6B64 /* FlickrImageDemoAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrImageDemoAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		13353AEC25D2DD1F001A6B64 /* FlickrImageDemoAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrImageDemoAppTests.swift; sourceTree = "<group>"; };
 		13353AEE25D2DD1F001A6B64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13353AF325D2DD1F001A6B64 /* FlickrImageDemoAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlickrImageDemoAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		13353AF725D2DD1F001A6B64 /* FlickrImageDemoAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrImageDemoAppUITests.swift; sourceTree = "<group>"; };
@@ -88,6 +89,9 @@
 		88A0953B25D2E5540027D58F /* AppError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		88A0953C25D2E5540027D58F /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		88A0954C25D2FEF80027D58F /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		88A7528625D517FC00A814A3 /* NetworkConnectionTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConnectionTest.swift; sourceTree = "<group>"; };
+		88A752A025D5191A00A814A3 /* NetworkManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTest.swift; sourceTree = "<group>"; };
+		88A752A825D51F3400A814A3 /* HomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTests.swift; sourceTree = "<group>"; };
 		88F1FA0125D3B4C400628C48 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
 		88F1FA0925D3B9CB00628C48 /* EndPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoints.swift; sourceTree = "<group>"; };
 		88F1FA1725D3C85500628C48 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -163,7 +167,9 @@
 		13353AEB25D2DD1F001A6B64 /* FlickrImageDemoAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				13353AEC25D2DD1F001A6B64 /* FlickrImageDemoAppTests.swift */,
+				88A7528625D517FC00A814A3 /* NetworkConnectionTest.swift */,
+				88A752A025D5191A00A814A3 /* NetworkManagerTest.swift */,
+				88A752A825D51F3400A814A3 /* HomeViewTests.swift */,
 				13353AEE25D2DD1F001A6B64 /* Info.plist */,
 			);
 			path = FlickrImageDemoAppTests;
@@ -488,7 +494,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13353AED25D2DD1F001A6B64 /* FlickrImageDemoAppTests.swift in Sources */,
+				88A752A925D51F3400A814A3 /* HomeViewTests.swift in Sources */,
+				88A752A125D5191A00A814A3 /* NetworkManagerTest.swift in Sources */,
+				88A7528725D517FC00A814A3 /* NetworkConnectionTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,7 +594,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -641,7 +649,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -658,7 +666,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = FlickrImageDemoApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -677,7 +685,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = FlickrImageDemoApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -696,7 +704,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = FlickrImageDemoAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -717,7 +725,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = FlickrImageDemoAppTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

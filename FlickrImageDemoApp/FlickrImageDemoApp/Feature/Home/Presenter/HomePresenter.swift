@@ -8,12 +8,13 @@ import Foundation
 
 class HomePresenter {
     
-    var photo: Photo?
-    var currentPage = 1
+    public var photo: Photo?
+    private var currentPage = 1
+    static let rowHeight = 36
     
     func loadImages(completion: @escaping (String?) -> ()) {
         let request = Router.photoSearch
-        NetworkManager.makeRequest(request, showLog: true, page: pageToLoad) { (result) in
+        NetworkManager.makeRequest(request, showLog: false, page: pageToLoad) { (result) in
             switch result {
             case .success(let value):
                 guard let data = value as? [String:Any], let photo = data["photos"] as? [String: Any]  else {
@@ -53,7 +54,7 @@ class HomePresenter {
     func getSearchHistory() -> [String] {
         let userDefaults = UserDefaults.standard
         if let history = userDefaults.value(forKey: UserDefaultKey.history) as? [String] {
-            return history
+            return history.reversed()
         }
         return []
     }
@@ -68,6 +69,21 @@ class HomePresenter {
         }
         currentPage = nextPage
         return currentPage
+    }
+    
+    func heightForTable(rowHeight: Int) -> Int {
+        let searches = getSearchHistory().count
+        let val = searches * rowHeight
+        let maxHeight = 6 * rowHeight
+        if val > maxHeight {
+            return maxHeight
+        }
+        return val
+    }
+    
+    func clearPhotos() {
+        currentPage = 1
+        photo = nil
     }
     
 }

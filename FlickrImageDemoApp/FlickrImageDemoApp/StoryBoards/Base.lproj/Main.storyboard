@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="nrr-q0-A8k">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -113,9 +112,10 @@
                     <navigationItem key="navigationItem" id="kbX-Sd-TsH"/>
                     <connections>
                         <outlet property="collectionView" destination="C0d-Fa-aUc" id="VHX-0n-Uby"/>
-                        <outlet property="lblNodataFound" destination="fOj-2Q-nBY" id="jqv-74-OFa"/>
+                        <outlet property="noDataLabel" destination="fOj-2Q-nBY" id="nN4-Gd-P78"/>
                         <outlet property="searchBar" destination="JRv-cy-M4M" id="TrS-pC-DYV"/>
-                        <outlet property="tableViewHistory" destination="xFe-pb-vbY" id="JtY-zd-Gqw"/>
+                        <outlet property="tableHistoryView" destination="xFe-pb-vbY" id="cIu-Zb-cdL"/>
+                        <outlet property="tableViewHeight" destination="Tw8-rb-L2E" id="LSW-Jk-IFc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

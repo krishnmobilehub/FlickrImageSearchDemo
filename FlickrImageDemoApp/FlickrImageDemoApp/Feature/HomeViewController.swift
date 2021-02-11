@@ -9,9 +9,10 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
-    @IBOutlet weak var lblNodataFound: UILabel!
-    @IBOutlet weak var tableViewHistory: UITableView!
+    
+    @IBOutlet weak var noDataLabel: UILabel!
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableHistoryView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -31,16 +32,15 @@ class HomeViewController: UIViewController {
     func reloadImages(isNewPage: Bool) {
         LoadingView.show()
         if !isNewPage {
-            presenter.currentPage = 1
-            presenter.photo = nil
+            presenter.clearPhotos()
             collectionView.scrollToTop()
         }
         presenter.loadImages() { (errorDescription) in
             if errorDescription == nil {
                 if self.presenter.photo?.photos?.count == 0 {
-                    self.lblNodataFound.isHidden = false
+                    self.noDataLabel.isHidden = false
                 } else {
-                    self.lblNodataFound.isHidden = true
+                    self.noDataLabel.isHidden = true
                 }
                 self.collectionView.reloadData()
             } else {
@@ -52,8 +52,9 @@ class HomeViewController: UIViewController {
 
     func setupUI() {
         searchBar.text = searchQuery
-        tableViewHistory.isHidden = true
-        lblNodataFound.isHidden = true
+        tableHistoryView.isHidden = true
+        noDataLabel.isHidden = true
+        tableHistoryView.tableFooterView = UIView()
         collectionView.registerCell(HomeCollViewCell.self)
         collectionView.reloadData()
         self.title = NavigationTitle.HomeViewTitle
@@ -102,7 +103,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
+        return 36
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -110,7 +111,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let history = presenter.getSearchHistory()
         searchQuery = history[indexPath.row]
         tableView.isHidden = true
-        lblNodataFound.isHidden = true
+        noDataLabel.isHidden = true
         searchBar.text = searchQuery
         reloadImages(isNewPage: false)
     }
@@ -132,16 +133,18 @@ extension HomeViewController: UISearchBarDelegate {
         searchQuery = searchBar.text ?? ""
         presenter.updateSearchHistory()
         reloadImages(isNewPage: false)
-        tableViewHistory.reloadData()
+        tableHistoryView.reloadData()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        tableViewHistory.isHidden = false
-        tableViewHistory.reloadData()
+        let tableHeight = presenter.heightForTable(rowHeight: HomePresenter.rowHeight)
+        tableViewHeight.constant = CGFloat(tableHeight)
+        tableHistoryView.isHidden = false
+        tableHistoryView.reloadData()
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        tableViewHistory.isHidden = true
+        tableHistoryView.isHidden = true
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
