@@ -15,7 +15,9 @@ public struct NetworkManager {
 
     static func makeRequest(_ urlRequest: HTTPRouter, showLog: Bool = false, completion: @escaping (Result) -> ()) {
         
-        AF.request(urlRequest.url,
+        let urlReq = NetworkManager.insertSearchQuery(url: urlRequest.url)
+        
+        AF.request(urlReq,
                    method: HTTPMethod(rawValue: urlRequest.method.rawValue) ,
                           parameters: urlRequest.parameters,
                           encoding: urlRequest.encodingType == .json ? JSONEncoding.default : URLEncoding.queryString,
@@ -23,7 +25,7 @@ public struct NetworkManager {
             switch responseObject.result {
             case .success(let value):
                 if (showLog) {
-                    print("URL: \(urlRequest.url)")
+                    print("URL: \(urlReq)")
                     print("Response: \(value)")
                 }
                 if let error = error(fromResponseObject: responseObject) {
@@ -35,19 +37,19 @@ public struct NetworkManager {
                 completion(.failure(generateError(from: error.underlyingError ?? error, with: responseObject)))
             }
         }
-        
-        // Decode data into specified datamodel
-        func decodeResponse<T:Decodable>(dataToDeocde:Data,decodingType:T.Type) -> T? {
-            do {
-                let genericModel = try JSONDecoder().decode(decodingType, from: dataToDeocde)
-                return genericModel
-            } catch {
-                return nil
-            }
-        }
-    
     }
-
+    
+    static func insertSearchQuery(url: URL) -> URL {
+        let str = url.absoluteString
+        var arrEndPoints = str.components(separatedBy: "=")
+        arrEndPoints.removeLast()
+        arrEndPoints.append(searchQuery)
+        let newStr = arrEndPoints.joined(separator: "=")
+        if let newUrl = URL.init(string: newStr) {
+            return newUrl
+        }
+        return url
+    }
     
     static func error(fromResponseObject responseObject: AFDataResponse<Any>) -> Error? {
         if let statusCode = responseObject.response?.statusCode {

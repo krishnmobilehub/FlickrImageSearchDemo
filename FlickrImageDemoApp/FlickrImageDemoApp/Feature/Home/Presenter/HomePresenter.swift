@@ -27,11 +27,35 @@ class HomePresenter {
         }
     }
     
+    func updateSearchHistory() {
+        if searchQuery == "" {
+            return
+        }
+        let userDefaults = UserDefaults.standard
+        if var history = userDefaults.value(forKey: UserDefaultKey.history) as? [String] {
+            if !history.contains(searchQuery) {
+                history.append(searchQuery)
+                userDefaults.setValue(history, forKey: UserDefaultKey.history)
+            }
+        } else {
+            userDefaults.setValue([searchQuery], forKey: UserDefaultKey.history)
+        }
+        userDefaults.synchronize()
+    }
+    
+    func getSearchHistory() -> [String] {
+        let userDefaults = UserDefaults.standard
+        if let history = userDefaults.value(forKey: UserDefaultKey.history) as? [String] {
+            return history
+        }
+        return []
+    }
+    
 }
 
 // MARK: - Datasource
 extension HomePresenter {
-    func numberOfRows() -> Int {
+    func numberOfItems() -> Int {
         return photo?.photos?.count ?? 0
     }
     

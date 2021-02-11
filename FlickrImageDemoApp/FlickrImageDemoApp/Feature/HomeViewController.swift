@@ -10,6 +10,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var lblNodataFound: UILabel!
+    @IBOutlet weak var tableViewHistory: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -30,6 +32,11 @@ class HomeViewController: UIViewController {
         LoadingView.show()
         presenter.loadImages { (errorDescription) in
             if errorDescription == nil {
+                if self.presenter.photo?.photos?.count == 0 {
+                    self.lblNodataFound.isHidden = false
+                } else {
+                    self.lblNodataFound.isHidden = true
+                }
                 self.collectionView.reloadData()
             } else {
                 self.showAlert(message: errorDescription!)
@@ -39,9 +46,11 @@ class HomeViewController: UIViewController {
     }
 
     func setupUI() {
+        tableViewHistory.isHidden = true
+        lblNodataFound.isHidden = true
         collectionView.registerCell(HomeCollViewCell.self)
         collectionView.reloadData()
-        self.title = ""
+        self.title = "Flicker"
     }
     
 }
@@ -49,7 +58,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return presenter.photo?.photos?.count ?? 0
+        return presenter.numberOfItems()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -67,14 +76,61 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let history = presenter.getSearchHistory()
+        return history.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TableCellIdentifier.History) else { return UITableViewCell() }
+        let history = presenter.getSearchHistory()
+        cell.textLabel?.text = history[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 30
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.view.endEditing(true)
+        let history = presenter.getSearchHistory()
+        searchQuery = history[indexPath.row]
+        tableView.isHidden = true
+        lblNodataFound.isHidden = true
+        searchBar.text = searchQuery
+        reloadImages()
+    }
+    
+}
+
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == collectionView {
+            self.view.endEditing(true)
+        }
+    }
+}
+
 extension HomeViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.view.endEditing(true)
+        searchQuery = searchBar.text ?? ""
+        presenter.updateSearchHistory()
+        reloadImages()
+        tableViewHistory.reloadData()
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        tableViewHistory.isHidden = false
+        tableViewHistory.reloadData()
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        tableViewHistory.isHidden = true
     }
     
 }

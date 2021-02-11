@@ -12,6 +12,7 @@ struct Photo {
     let page : Int?
     let pages : Int?
     let perpage : Int?
+    let total: Int?
 
     init(dict: [String:Any]) {
         page = dict["page"] as? Int ?? 0
@@ -22,6 +23,7 @@ struct Photo {
         } else {
             photos = nil
         }
+        total = dict["total"] as? Int ?? 0
     }
 
 }
