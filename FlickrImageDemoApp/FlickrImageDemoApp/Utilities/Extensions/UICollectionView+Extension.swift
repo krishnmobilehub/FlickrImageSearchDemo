@@ -21,5 +21,9 @@ public extension UICollectionView {
         }
         return cell
     }
+    
+    func scrollToTop() {
+        contentOffset = CGPoint(x: 0, y: -contentInset.top)
+    }
 
 }

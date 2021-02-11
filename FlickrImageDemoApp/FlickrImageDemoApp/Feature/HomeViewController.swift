@@ -25,12 +25,17 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        reloadImages()
+        reloadImages(isNewPage: false)
     }
     
-    func reloadImages() {
+    func reloadImages(isNewPage: Bool) {
         LoadingView.show()
-        presenter.loadImages(page: 1) { (errorDescription) in
+        if !isNewPage {
+            presenter.currentPage = 1
+            presenter.photo = nil
+            collectionView.scrollToTop()
+        }
+        presenter.loadImages() { (errorDescription) in
             if errorDescription == nil {
                 if self.presenter.photo?.photos?.count == 0 {
                     self.lblNodataFound.isHidden = false
@@ -46,11 +51,12 @@ class HomeViewController: UIViewController {
     }
 
     func setupUI() {
+        searchBar.text = searchQuery
         tableViewHistory.isHidden = true
         lblNodataFound.isHidden = true
         collectionView.registerCell(HomeCollViewCell.self)
         collectionView.reloadData()
-        self.title = "Flicker"
+        self.title = NavigationTitle.HomeViewTitle
     }
     
 }
@@ -74,6 +80,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return CGSize(width: self.view.frame.size.width / 2.3, height: self.view.frame.size.height/3.5)
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.item == presenter.numberOfItems() - 10 {
+            reloadImages(isNewPage: true)
+        }
+    }
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -101,7 +112,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.isHidden = true
         lblNodataFound.isHidden = true
         searchBar.text = searchQuery
-        reloadImages()
+        reloadImages(isNewPage: false)
     }
     
 }
@@ -120,7 +131,7 @@ extension HomeViewController: UISearchBarDelegate {
         self.view.endEditing(true)
         searchQuery = searchBar.text ?? ""
         presenter.updateSearchHistory()
-        reloadImages()
+        reloadImages(isNewPage: false)
         tableViewHistory.reloadData()
     }
     
@@ -131,6 +142,10 @@ extension HomeViewController: UISearchBarDelegate {
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         tableViewHistory.isHidden = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.view.endEditing(true)
     }
     
 }

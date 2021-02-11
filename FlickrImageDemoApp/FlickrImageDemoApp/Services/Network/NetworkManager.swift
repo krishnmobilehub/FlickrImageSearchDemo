@@ -13,9 +13,9 @@ public struct NetworkManager {
     static let networkUnavailableCode: Double = 1000
     static let networkGenericErrorCode: Double = 1009
 
-    static func makeRequest(_ urlRequest: HTTPRouter, showLog: Bool = false, completion: @escaping (Result) -> ()) {
+    static func makeRequest(_ urlRequest: HTTPRouter, showLog: Bool = false, page: Int, completion: @escaping (Result) -> ()) {
         
-        let urlReq = NetworkManager.insertSearchQuery(url: urlRequest.url)
+        let urlReq = NetworkManager.insertSearchQueryAndPage(url: urlRequest.url, page: page)
         
         AF.request(urlReq,
                    method: HTTPMethod(rawValue: urlRequest.method.rawValue) ,
@@ -39,13 +39,15 @@ public struct NetworkManager {
         }
     }
     
-    static func insertSearchQuery(url: URL) -> URL {
+    static func insertSearchQueryAndPage(url: URL, page: Int) -> URL {
         let str = url.absoluteString
         var arrEndPoints = str.components(separatedBy: "=")
         arrEndPoints.removeLast()
         arrEndPoints.append(searchQuery)
-        let newStr = arrEndPoints.joined(separator: "=")
+        var newStr = arrEndPoints.joined(separator: "=")
+        newStr.append("/&page=\(page)")
         if let newUrl = URL.init(string: newStr) {
+            print("NewUrl: ", newUrl)
             return newUrl
         }
         return url

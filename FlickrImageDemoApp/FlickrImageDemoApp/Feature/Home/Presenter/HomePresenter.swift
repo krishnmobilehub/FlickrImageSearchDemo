@@ -9,17 +9,24 @@ import Foundation
 class HomePresenter {
     
     var photo: Photo?
+    var currentPage = 1
     
-    func loadImages(page: Int, completion: @escaping (String?) -> ()) {
+    func loadImages(completion: @escaping (String?) -> ()) {
         let request = Router.photoSearch
-        NetworkManager.makeRequest(request, showLog: true) { (result) in
+        NetworkManager.makeRequest(request, showLog: true, page: pageToLoad) { (result) in
             switch result {
             case .success(let value):
                 guard let data = value as? [String:Any], let photo = data["photos"] as? [String: Any]  else {
                     completion("No data found")
                     return
                 }
-                self.photo = Photo(dict: photo)
+                if self.photo == nil {
+                    self.photo = Photo(dict: photo)
+                } else {
+                    if let newPhotos = Photo(dict: photo).photos {
+                        self.photo?.photos?.append(contentsOf: newPhotos)
+                    }
+                }
                 completion(nil)
              case .failure(let error):
                 completion(error.localizedDescription)
@@ -49,6 +56,18 @@ class HomePresenter {
             return history
         }
         return []
+    }
+    
+    var pageToLoad: Int {
+        guard let pages = photo?.pages else {
+            return currentPage
+        }
+        let nextPage = currentPage + 1
+        if pages <= nextPage {
+            return currentPage
+        }
+        currentPage = nextPage
+        return currentPage
     }
     
 }

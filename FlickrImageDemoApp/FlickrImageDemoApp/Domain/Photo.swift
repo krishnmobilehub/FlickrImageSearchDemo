@@ -8,7 +8,7 @@ import Foundation
 
 struct Photo {
 
-    let photos : [PhotosDetail]?
+    var photos : [PhotosDetail]?
     let page : Int?
     let pages : Int?
     let perpage : Int?

@@ -36,6 +36,11 @@ struct TableCellIdentifier {
     static let History = "HistoryTableCell"
 }
 
+//MARK: - Navigation Titles
+struct NavigationTitle {
+    static let HomeViewTitle = "Flicker"
+}
+
 //MARK: - Set Notification Observers
 extension Notification.Name {
     static let networkStatusChange = Notification.Name("__networkStatusChangeNotification")
